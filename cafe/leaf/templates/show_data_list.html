@@ -1,0 +1,12 @@
+<div>
+    <h1>Show cafe list</h1>
+    {% for cafe in cafes %}
+    <div style="background: #000000; color: antiquewhite; width: 50%; padding: 10px; margin: 30px;">
+    <p>id(auto) : {{ cafe.id }}</p>
+    <p>name : {{ cafe.name }}</p>
+    <p>location : {{ cafe.location }}</p>
+    <p>available_seat : {{ cafe.available_seat }}</p>
+    <p>tag_id : {{ cafe.tag_id }}</p>
+    </div>
+    {% endfor %}
+</div>
