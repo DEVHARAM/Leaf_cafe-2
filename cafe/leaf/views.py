@@ -12,14 +12,16 @@ def showDatalist(request):
 
 def cafe_data(request):
     cafe = []
-    cafe.append(Cafe.objects.create(name='cafe de DANAHAN',location='경기 수원시 영통구 에듀타운로 17',available_seat=2,tag_id=3))
-    cafe.append(Cafe.objects.create(name='르브런쉭 광교점', location='경기 수원시 영통구 센트럴타운로 85', available_seat=3, tag_id=4))
-    cafe.append(Cafe.objects.create(name='러버블', location='경기 수원시 팔달구 월드컵로211번길 20-1', available_seat=0, tag_id=40))
-    cafe.append(Cafe.objects.create(name='HOWABOUT', location='경기 수원시 팔달구 아주로 7', available_seat=4, tag_id=5))
-    cafe.append(Cafe.objects.create(name='카페그날카페', location='경기 수원시 팔달구 월드컵로 319-1', available_seat=5, tag_id=10))
-    cafe.append(Cafe.objects.create(name='씨스카페', location='경기 수원시 팔달구 권광로364번길 9', available_seat=6, tag_id=11))
-    cafe.append(Cafe.objects.create(name='까페안녕', location='경기 수원시 영통구 월드컵로193번길 36', available_seat=7, tag_id=12))
-    cafe.append(Cafe.objects.create(name='롤링핀광교점', location='경기 수원시 영통구 센트럴타운로 85', available_seat=8, tag_id=13))
+    # complete insert data
+    # cafe.append(Cafe.objects.create(name='cafe de DANAHAN',location='경기 수원시 영통구 에듀타운로 17',available_seat=2,tag_id=3))
+    # cafe.append(Cafe.objects.create(name='르브런쉭 광교점', location='경기 수원시 영통구 센트럴타운로 85', available_seat=3, tag_id=4))
+    # cafe.append(Cafe.objects.create(name='러버블', location='경기 수원시 팔달구 월드컵로211번길 20-1', available_seat=0, tag_id=40))
+    # cafe.append(Cafe.objects.create(name='HOWABOUT', location='경기 수원시 팔달구 아주로 7', available_seat=4, tag_id=5))
+    # cafe.append(Cafe.objects.create(name='카페그날카페', location='경기 수원시 팔달구 월드컵로 319-1', available_seat=5, tag_id=10))
+    # cafe.append(Cafe.objects.create(name='씨스카페', location='경기 수원시 팔달구 권광로364번길 9', available_seat=6, tag_id=11))
+    # cafe.append(Cafe.objects.create(name='까페안녕', location='경기 수원시 영통구 월드컵로193번길 36', available_seat=7, tag_id=12))
+    # cafe.append(Cafe.objects.create(name='롤링핀광교점', location='경기 수원시 영통구 센트럴타운로 85', available_seat=8, tag_id=13))
+
     # cafe.append(Cafe.objects.create(name='', location='', available_seat=, tag_id=))
     return render(request, 'leaf/templates/main.html', {})
 
