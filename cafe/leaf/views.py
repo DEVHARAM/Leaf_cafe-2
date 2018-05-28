@@ -4,7 +4,6 @@ from .models import *
 def main(request):
     return render(request, 'main.html', {})
 
-
 # def showDatalist(request):
 #     cafes = Cafe.objects.all()
 #     tags = Tag.objects.all()
