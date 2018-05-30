@@ -1,12 +1,10 @@
-# from django.http import HttpResponse
-#
-#
-# def leaf(request):
-#     return HttpResponse("Hello, world. You're at the leaf.")
-
 from django.shortcuts import render
-from django.template.loader import get_template
-
+from .models import *
 
 def main(request):
-    return render(request, 'leaf/templates/main.html', {})
+    return render(request, 'main.html', {})
+
+# def showDatalist(request):
+#     cafes = Cafe.objects.all()
+#     tags = Tag.objects.all()
+#     return render(request, 'leaf/templates/show_data_list.html', {'cafes': cafes,'tags':tags})
