@@ -4,5 +4,5 @@ venv/
 .python-version
 __pycache__/
 cafe/__pycache__/
-leaf/__pycache__/
+cafe/leaf/__pycache__/
 leaf/migrations/__pycache__/
