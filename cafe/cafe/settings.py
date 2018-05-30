@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'cafe.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'leaf',
+        'USER': 'root',
+        'PASSWORD': 'J2qoDOXADNV6DVVqsVe1NOiLY1JzhL',
+        'HOST': 'dev.ryuneeee.com',
+        'PORT': '3306',
     }
 }
 
