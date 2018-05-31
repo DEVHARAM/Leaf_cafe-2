@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .models import *
 
 def main(request):
-    return render(request, 'main.html', {})
+    cafe_data=Cafe.objects.all();
+    return render(request, 'main.html', {"cafe_data=":cafe_data})
 
 # def showDatalist(request):
 #     cafes = Cafe.objects.all()
