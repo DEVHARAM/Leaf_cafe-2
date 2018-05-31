@@ -1,0 +1,32 @@
+body{
+    overflow: hidden;
+}
+
+.navbar{
+    padding: 20px 10% 20px 10%;
+    background: #000;
+    color: white;
+}
+
+.form-inline{
+    width: 40%;
+    display: flex;
+    flex-direction: row;
+}
+
+.form-control{
+    margin: 0px 8px 0px 8px;
+    flex: 5;
+}
+
+.btn{
+    margin: 0px 8px 0px 8px;
+    flex: 1;
+}
+
+.content-container{
+    overflow-y: scroll;
+    height: 100%;
+    background: powderblue;
+    /*padding: 0 10% 0 10%;*/
+}
