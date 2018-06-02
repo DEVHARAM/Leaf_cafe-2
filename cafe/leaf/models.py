@@ -3,17 +3,18 @@ from django.db import models
 
 
 # Create your models here.
+
+class Tag(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=45)
+
+
 class Cafe(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=45)
     location = models.CharField(max_length=100)
     available_seat = models.IntegerField()
-    tag_id = models.IntegerField()
-
-
-class Tag(models.Model):
-    id = models.ForeignKey(Cafe, primary_key=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length=45)
+    tags = models.ManyToManyField(Tag)
 
 
 class User(models.Model):

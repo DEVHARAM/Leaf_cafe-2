@@ -31,11 +31,10 @@ function create_map() {
 
 function createInfoWindow(e, marker) {
 // 인포윈도우로 장소에 대한 설명을 표시합니다
+    let tags = '';
+    let clickedIw;
     let iw = new daum.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px 0;">' + e.fields.name + '</div>'
-    });
-    let clickedIw = new daum.maps.InfoWindow({
-        content: '<div style="width:400px;height:300px;text-align:center;padding:6px 0;">' + e.fields.name + '</div>'
+        content: '<div style="width:150px;text-align:center;padding:6px;">' + e.fields.name + '</div>'
     });
     daum.maps.event.addListener(marker, 'mouseover', function () {
         iw.open(map, marker);
@@ -44,8 +43,20 @@ function createInfoWindow(e, marker) {
         iw.close();
     });
     daum.maps.event.addListener(marker, 'click', function () {
-        closeIw(clickedIw);
-        clickedIw.open(map, marker);
+        $.ajax({
+          url: "/cafe/" + e.pk,
+        }).done(function(data) {
+            let content = '<div class="container">';
+            content += '<div style="width:400px;height:300px;text-align:center;padding:6px;"><p>' + e.fields.name + '</p>';
+            data.map( e => {
+                content += '<span class="badge badge-info">' + e + '</span> ';
+            });
+            content += '</div>';
+
+            clickedIw = new daum.maps.InfoWindow({ content: content });
+            clickedIw.open(map, marker);
+            closeIw(clickedIw);
+        });
     });
 }
 
