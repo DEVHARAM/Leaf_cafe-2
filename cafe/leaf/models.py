@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.db import models
+from django.core.validators import MaxValueValidator
 
 
 # Create your models here.
@@ -32,7 +33,7 @@ class Comment(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     cafe_id = models.ForeignKey(Cafe, on_delete=models.CASCADE)
     content = models.CharField(max_length=50)
-    rating = models.IntegerField()
+    rating = models.IntegerField(validators=[MaxValueValidator(5)])
 
 
 # Register model to Django Admin site

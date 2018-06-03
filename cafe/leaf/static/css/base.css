@@ -30,3 +30,7 @@ body{
     background: powderblue;
     /*padding: 0 10% 0 10%;*/
 }
+
+.border{
+    margin-top: 8px;
+}
