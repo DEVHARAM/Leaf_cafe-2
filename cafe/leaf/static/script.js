@@ -51,7 +51,9 @@ function createInfoWindow(e, marker) {
             data.map( e => {
                 content += '<span class="badge badge-info">' + e + '</span> ';
             });
-            content+='<button>입장</button>'
+            content += '<div class="d-flex flex-column" style="text-size: 10px;">' +
+                    '<button class="btn-outline-info" onclick="seat_update()">입장</button>'
+                    '</div>'
             $.ajax({
                 url: "/cafe/comment/" + e.pk,
             }).done(function (comment) {
@@ -98,5 +100,7 @@ function createComment(){
 //    TO DO : 로그인 시 작성되도록
 }
 
-
+function seat_update(){
+    //여석 관리
+}
 map.panTo(ajou_LatLng);
