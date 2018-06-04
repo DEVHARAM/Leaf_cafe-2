@@ -51,6 +51,7 @@ function createInfoWindow(e, marker) {
             data.map( e => {
                 content += '<span class="badge badge-info">' + e + '</span> ';
             });
+            content+='<button>입장</button>'
             $.ajax({
                 url: "/cafe/comment/" + e.pk,
             }).done(function (comment) {
@@ -63,6 +64,7 @@ function createInfoWindow(e, marker) {
                    content += '<div class="border" style="margin-top: 4px; text-align: left; padding: 4px;">' +
                        '<div class="d-flex justify-content-start" style="margin-bottom: 4px; flex: 5">사용자 이름:' + e.user_id_id
                        +'<div class="d-flex justify-content-end" style="flex: 1;">별점:'+e.rating+'</div>'
+
                        + '</div>'
                        + e.content + '</div>';
                 });
