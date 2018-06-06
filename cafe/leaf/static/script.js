@@ -55,7 +55,7 @@ function createInfoWindow(e, marker) {
                     '<button class="btn-outline-info" onclick="seat_update()">입장</button>'
                     '</div>'
             $.ajax({
-                url: "/cafe/comment/" + e.pk,
+                url: "/cafe/" + e.pk + "/comments",
             }).done(function (comment) {
                 console.log("댓글 가져온거  : ",comment);
                 content += '<div class="d-flex flex-column" style="text-size: 10px;">' +
