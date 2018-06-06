@@ -17,7 +17,9 @@
         <a href="/?tags={{t.name}}">{{t.name}}</a>
         {% endfor %}
     </div>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+</div>
+<div class="content-container" id="main">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div id="extend" onclick="openNav();"><img src="/static/images/icons/list.png"></div>
         <a class="navbar-brand" href="/">어느 카페 갈까?</a>
         <ul class="navbar-nav mr-auto">
@@ -42,8 +44,6 @@
             <button class="btn btn-outline-info" type="submit">Search</button>
         </form>
     </nav>
-</div>
-<div class="content-container" id="main">
     {% block content %}
     {% endblock %}
 </div>
