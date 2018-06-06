@@ -29,6 +29,46 @@ function create_map() {
 
 }
 
+
+function addComment(cid) {
+    $.ajax({
+        url: "/cafe/" + cid + "/comments",
+        type: "post",
+        data: {comment: $('#comment').first().val(), rating: $('#rating').val() }
+    }).done(function (comments) {
+        console.log(comments);
+        $('#comment-wrapper')[0].innerHTML = draw_comments_box(cid, comments)
+    });
+}
+
+function draw_comments_box(e, comment) {
+    let content = '';
+    content += '<div id="comment-wrapper" class="d-flex flex-column" style="text-size: 10px; padding: 10px;">' +
+    '<div class="row">' +
+    '<input type="text" class="form-control" id="comment" placeholder="댓글을 입력하세요!">' +
+    '<select class="form-control col-2" id="rating" style="width: 30px;">' +
+        '      <option>1</option>' +
+        '      <option>2</option>' +
+        '      <option>3</option>' +
+        '      <option>4</option>' +
+        '      <option>5</option>' +
+        '    </select>' +
+    '<button class="btn-outline-info" onclick="addComment(' + e.pk + ')">작성</button>' +
+    '</div>' +
+    '</div>' +
+    '<div id="comment-box" style="height: 340px;">';
+    comment.map(e => {
+        content += '<div class="border" style="margin-top: 4px; text-align: left; padding: 4px;">' +
+            '<div class="d-flex justify-content-start" style="margin-bottom: 4px; flex: 5">이름: ' + e.name
+            + '<div class="d-flex justify-content-end" style="flex: 1;">별점:' + e.rating + '</div>'
+
+            + '</div>'
+            + e.content + '</div>';
+    });
+    content += '</div></div>'
+    return content;
+}
+
 function createInfoWindow(e, marker) {
 // 인포윈도우로 장소에 대한 설명을 표시합니다
     let clickedIw;
@@ -43,12 +83,12 @@ function createInfoWindow(e, marker) {
     });
     daum.maps.event.addListener(marker, 'click', function () {
         $.ajax({
-          url: "/cafe/" + e.pk,
-        }).done(function(data) {
-            console.log("가져온 taf",data);
+            url: "/cafe/" + e.pk,
+        }).done(function (data) {
+            console.log("가져온 taf", data);
             let content = '<div class="container">';
             content += '<div style="width:400px;height:500px;text-align:center;padding:6px;"><p>' + e.fields.name + '</p>';
-            data.map( e => {
+            data.map(e => {
                 content += '<span class="badge badge-info">' + e + '</span> ';
             });
             // content += '<div class="d-flex flex-column" style="text-size: 10px;">' +
@@ -56,26 +96,10 @@ function createInfoWindow(e, marker) {
             //         '</div>'
             $.ajax({
                 url: "/cafe/" + e.pk + "/comments",
-            }).done(function (comment) {
-                console.log("댓글 가져온거  : ", comment);
-                content += '<div class="d-flex flex-column" style="text-size: 10px; padding: 10px;">' +
-                    '<div class="row">'+
-                    '<input type="text" class="form-control" id="comment" placeholder="댓글을 입력하세요!">' +
-                    '<button class="btn-outline-info" onclick="createComment()">작성</button>' +
-                    '</div>' +
-                    '</div>' +
-                    '<div id="comment-box" style="height: 340px;">';
-                comment.map(e => {
-                   content += '<div class="border" style="margin-top: 4px; text-align: left; padding: 4px;">' +
-                       '<div class="d-flex justify-content-start" style="margin-bottom: 4px; flex: 5">사용자 이름:' + e.name
-                       +'<div class="d-flex justify-content-end" style="flex: 1;">별점:'+e.rating+'</div>'
-
-                       + '</div>'
-                       + e.content + '</div>';
-                });
-                content += '</div>'
-                content += '</div>';
-                clickedIw = new daum.maps.InfoWindow({ content: content });
+            }).done(function (comments) {
+                console.log("댓글 가져온거  : ", comments);
+                content += draw_comments_box(e, comments);
+                clickedIw = new daum.maps.InfoWindow({content: content});
                 clickedIw.open(map, marker);
                 iw.close();
                 closeIw(clickedIw);
@@ -98,12 +122,7 @@ function createMarker(data) {
     });
 }
 
-function createComment(){
-    console.log("댓글 작성 클릭");
-//    TO DO : 로그인 시 작성되도록
-}
-
-function seat_update(){
+function seat_update() {
     //여석 관리
 }
 
@@ -117,4 +136,5 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
     document.getElementById("main").style.marginLeft = "0";
 }
+
 map.panTo(ajou_LatLng);

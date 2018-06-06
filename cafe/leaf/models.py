@@ -27,29 +27,37 @@ class Cafe(models.Model):
         return cafes
 
 
+    @staticmethod
+    def getCafe(id):
+        try:
+            return Cafe.objects.filter(id=id).first()
+        except:
+            return None
+
+
 class User(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.CharField(max_length=20, unique=True)  # email
+    email = models.CharField(max_length=20, unique=True)  # email
     password = models.CharField(max_length=20)
     name = models.CharField(max_length=10)
     tag_search = models.CharField(max_length=1000, null=True)
 
     @staticmethod
-    def getUser(user_id):
+    def getUser(email):
         try:
-            return User.objects.filter(user_id=user_id).first()
+            return User.objects.filter(email=email).first()
         except:
             return None
 
     @staticmethod
-    def getUserByLogin(user_id, password):
-        return User.objects.filter(user_id=user_id, password=password).first()
+    def getUserByLogin(email, password):
+        return User.objects.filter(email=email, password=password).first()
 
 
 class Comment(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    cafe_id = models.ForeignKey(Cafe, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    cafe = models.ForeignKey(Cafe, on_delete=models.CASCADE)
     content = models.CharField(max_length=50)
     rating = models.IntegerField(validators=[MaxValueValidator(5)])
 
