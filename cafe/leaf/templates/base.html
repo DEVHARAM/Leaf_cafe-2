@@ -10,12 +10,20 @@
 </head>
 <body>
 <div>
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <h1>Tag List</h1>
+        <a href="#"></a>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="/">어느 카페 갈까?</a>
         <ul class="navbar-nav mr-auto">
-            {% if user.id is not None %}
+            {% if user is not None %}
                 <li class="nav-item">
-                <a class="nav-link" href="/">Hello, {{ user.name }}!</a>
+                <div onclick="openNav()">Tag 리스트 보기</div>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/">{{ user.name }}</a>
                 </li>
                 <li class="nav-item">
                 <a class="nav-link" href="/signout">로그아웃</a>
@@ -25,6 +33,9 @@
                 <a class="nav-link" href="/signin">로그인/회원가입</a>
             </li>
             {% endif %}
+            <li class="nav-item">
+                <a class="nav-link" href="#"></a>
+            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" name="search_form">
             <input class="form-control" type="search" placeholder="무료주차, 데이트, 달달 ..." aria-label="Search" name="tag">
