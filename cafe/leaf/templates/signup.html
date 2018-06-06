@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+
 {% load static %}
 
 {% block content %}
@@ -15,7 +16,8 @@
 <div class="limiter">
     <div class="container-login100">
         <div class="wrap-login100">
-            <form class="login100-form validate-form", action="/login">
+            <form class="login100-form validate-form" action="/signup" method="POST">
+                {% csrf_token %}
                 <span class="login100-form-title p-b-26">
                     Welcome
                 </span>
@@ -30,11 +32,24 @@
                     <span class="focus-input100" data-placeholder="Email"></span>
                 </div>
 
+                <div class="wrap-input100 validate-input">
+                    <input class="input100" type="text" name="name">
+                    <span class="focus-input100" data-placeholder="Name"></span>
+                </div>
+
                 <div class="wrap-input100 validate-input" data-validate="Enter password">
                     <span class="btn-show-pass">
                         <i class="zmdi zmdi-eye"></i>
                     </span>
                     <input class="input100" type="password" name="pass">
+                    <span class="focus-input100" data-placeholder="Password"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    <span class="btn-show-pass">
+                        <i class="zmdi zmdi-eye"></i>
+                    </span>
+                    <input class="input100" type="password" name="pass-repeat">
                     <span class="focus-input100" data-placeholder="Password Repeat"></span>
                 </div>
 
@@ -45,16 +60,6 @@
                             Login
                         </button>
                     </div>
-                </div>
-
-                <div class="text-center p-t-115">
-                    <span class="txt1">
-                        Don’t have an account?
-                    </span>
-
-                    <a class="txt2" href="#">
-                        Sign Up
-                    </a>
                 </div>
             </form>
         </div>
