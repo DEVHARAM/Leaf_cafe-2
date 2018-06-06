@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 </head>
 <body>
-<div>
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <h1 style="padding: 10px;">Tag List</h1>
-        {% for t in tags %}
-        <a href="/?tags={{t.name}}">{{t.name}}</a>
-        {% endfor %}
+<div id="mySidenav" class="sidenav">
+    <div style="display: flex; flex-direction: row">
+        <h1 style="margin: 16px; color: white; flex: 5;">Tag 목록</h1>
+        <a href="javascript:void(0)" style="flex: 1;"  onclick="closeNav()">&times;</a>
     </div>
+    {% for t in tags %}
+        <a href="/?tags={{t.name}}">{{t.name}}</a>
+    {% endfor %}
 </div>
 <div class="content-container" id="main">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
