@@ -82,5 +82,8 @@ def create_user(request):
 
 
 def signout(request):
-    del request.session['current_user']
+    try:
+        del request.session['current_user']
+    except:
+        pass
     return redirect('/')
