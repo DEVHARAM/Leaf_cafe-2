@@ -33,11 +33,23 @@
                 <a class="nav-link" href="/signin">로그인/회원가입</a>
             </li>
             {% endif %}
+
+
         </ul>
         <form class="form-inline my-2 my-lg-0" name="search_form">
             <input class="form-control" type="search" placeholder="무료주차, 데이트, 달달 ..." aria-label="Search" name="tag">
             <button class="btn btn-outline-info" type="submit">Search</button>
         </form>
+        {% if recent|length > 0 %}
+            <li class="nav-item nav-link">
+                최근검색:
+            {% for r in recent %}
+                {% if r is not '' %}
+                <a class="badge badge-info" href="/?tags={{r}}">{{r}}</a>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        </li>
     </nav>
 </div>
 <div class="content-container" id="main">
