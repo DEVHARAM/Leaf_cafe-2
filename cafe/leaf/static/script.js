@@ -73,7 +73,7 @@ function createInfoWindow(e, marker) {
 // 인포윈도우로 장소에 대한 설명을 표시합니다
     let clickedIw;
     let iw = new daum.maps.InfoWindow({
-        content: '<div style="width:200px;text-align:center;padding:6px;">' + e.fields.name + '<br><span class="badge badge-danger">' + e.fields.available_seat + ' 자리남음</span></div>'
+        content: '<div style="width:200px;text-align:center;padding:15px;">' + e.fields.name + '<br><br><span class="badge badge-danger">' + e.fields.available_seat + ' 자리남음</span></div>'
     });
     daum.maps.event.addListener(marker, 'mouseover', function () {
         iw.open(map, marker);
@@ -86,7 +86,7 @@ function createInfoWindow(e, marker) {
             url: "/cafe/" + e.pk,
         }).done(function (data) {
             let content = '<div class="container">';
-            content += '<div style="width:400px;height:500px;text-align:center;padding:6px;"><p>' + e.fields.name + ' <span class="badge badge-danger">' + e.fields.available_seat + ' 자리남음</span></p>';
+            content += '<div style="width:400px;height:500px;text-align:center;padding:20px;"><p>' + e.fields.name + ' <span class="badge badge-danger">' + e.fields.available_seat + ' 자리남음</span></p>';
             data.map(e => {
                 content += '<a class="badge badge-info" href="/?tag='+ e+ '">' + e + '</a> ';
             });
