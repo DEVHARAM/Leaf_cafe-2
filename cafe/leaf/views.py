@@ -34,7 +34,9 @@ def cafe_detail(request, cafe_id):
 
 
 def cafe_comment(request, cafe_id):
-    comments = [c for c in Comment.objects.filter(cafe_id=cafe_id).values()]
+    comments = []
+    for c in Comment.objects.filter(cafe_id=cafe_id).all():
+        comments.append({'content':c.content, 'name':c.user_id.name, 'rating': c.rating})
     return HttpResponse(json.dumps(comments), content_type='application/json')
 
 

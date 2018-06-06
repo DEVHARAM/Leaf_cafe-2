@@ -47,24 +47,27 @@ function createInfoWindow(e, marker) {
         }).done(function(data) {
             console.log("가져온 taf",data);
             let content = '<div class="container">';
-            content += '<div style="width:400px;height:300px;text-align:center;padding:6px;"><p>' + e.fields.name + '</p>';
+            content += '<div style="width:400px;height:500px;text-align:center;padding:6px;"><p>' + e.fields.name + '</p>';
             data.map( e => {
                 content += '<span class="badge badge-info">' + e + '</span> ';
             });
-            content += '<div class="d-flex flex-column" style="text-size: 10px;">' +
-                    '<button class="btn-outline-info" onclick="seat_update()">입장</button>'
-                    '</div>'
+            // content += '<div class="d-flex flex-column" style="text-size: 10px;">' +
+            //         '<button class="btn-outline-info" onclick="seat_update()">입장</button>'
+            //         '</div>'
             $.ajax({
                 url: "/cafe/" + e.pk + "/comments",
             }).done(function (comment) {
-                console.log("댓글 가져온거  : ",comment);
-                content += '<div class="d-flex flex-column" style="text-size: 10px;">' +
-                    '<button class="btn-outline-info" onclick="createComment()">댓글 작성하기</button>'
+                console.log("댓글 가져온거  : ", comment);
+                content += '<div class="d-flex flex-column" style="text-size: 10px; padding: 10px;">' +
+                    '<div class="row">'+
+                    '<input type="text" class="form-control" id="comment" placeholder="댓글을 입력하세요!">' +
+                    '<button class="btn-outline-info" onclick="createComment()">작성</button>' +
                     '</div>' +
-                    '<div style="height: 200px; overflow-y: hidden;">'
+                    '</div>' +
+                    '<div id="comment-box" style="height: 340px;">';
                 comment.map(e => {
                    content += '<div class="border" style="margin-top: 4px; text-align: left; padding: 4px;">' +
-                       '<div class="d-flex justify-content-start" style="margin-bottom: 4px; flex: 5">사용자 이름:' + e.user_id_id
+                       '<div class="d-flex justify-content-start" style="margin-bottom: 4px; flex: 5">사용자 이름:' + e.name
                        +'<div class="d-flex justify-content-end" style="flex: 1;">별점:'+e.rating+'</div>'
 
                        + '</div>'
