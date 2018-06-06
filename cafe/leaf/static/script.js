@@ -73,7 +73,7 @@ function createInfoWindow(e, marker) {
 // 인포윈도우로 장소에 대한 설명을 표시합니다
     let clickedIw;
     let iw = new daum.maps.InfoWindow({
-        content: '<div style="width:150px;text-align:center;padding:6px;">' + e.fields.name + '</div>'
+        content: '<div style="width:200px;text-align:center;padding:6px;">' + e.fields.name + '<br><span class="badge badge-danger">' + e.fields.available_seat + ' 자리남음</span></div>'
     });
     daum.maps.event.addListener(marker, 'mouseover', function () {
         iw.open(map, marker);
@@ -85,11 +85,10 @@ function createInfoWindow(e, marker) {
         $.ajax({
             url: "/cafe/" + e.pk,
         }).done(function (data) {
-            console.log("가져온 taf", data);
             let content = '<div class="container">';
-            content += '<div style="width:400px;height:500px;text-align:center;padding:6px;"><p>' + e.fields.name + '</p>';
+            content += '<div style="width:400px;height:500px;text-align:center;padding:6px;"><p>' + e.fields.name + ' <span class="badge badge-danger">' + e.fields.available_seat + ' 자리남음</span></p>';
             data.map(e => {
-                content += '<span class="badge badge-info">' + e + '</span> ';
+                content += '<a class="badge badge-info" href="/?tag='+ e+ '">' + e + '</a> ';
             });
             // content += '<div class="d-flex flex-column" style="text-size: 10px;">' +
             //         '<button class="btn-outline-info" onclick="seat_update()">입장</button>'
@@ -97,7 +96,6 @@ function createInfoWindow(e, marker) {
             $.ajax({
                 url: "/cafe/" + e.pk + "/comments",
             }).done(function (comments) {
-                console.log("댓글 가져온거  : ", comments);
                 content += draw_comments_box(e, comments);
                 clickedIw = new daum.maps.InfoWindow({content: content});
                 clickedIw.open(map, marker);

@@ -28,7 +28,7 @@ def main(request):
     cafes = Cafe.getCafesByTag(tag)
     cafe_data = serializers.serialize('json', cafes, fields=('name', 'location', 'available_seat'))
     return render(request, 'main.html',
-                  {"cafe_data": cafe_data, 'user': user, 'tags': Tag.objects.all(), 'recent': recent})
+                  {"cafe_data": cafe_data, 'user': user, 'tags': Tag.objects.all(), 'recent': list(reversed(recent))})
 
 
 def cafe_detail(request, cafe_id):
