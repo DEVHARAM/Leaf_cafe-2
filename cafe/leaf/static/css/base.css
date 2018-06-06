@@ -35,6 +35,15 @@ body{
     margin-top: 8px;
 }
 
+#extend img{
+    left: 0;
+    top: 0;
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    padding: 10px;
+}
+
 /* The side navigation menu */
 .sidenav {
     height: 100%; /* 100% Full-height */

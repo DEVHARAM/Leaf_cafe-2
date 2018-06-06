@@ -12,17 +12,15 @@
 <div>
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <h1>Tag List</h1>
+        <h1 style="padding: 10px;">Tag List</h1>
         {% for t in tags %}
-        <a href="/?tag={{t.name}}">{{t.name}}</a>
+        <a href="/?tags={{t.name}}">{{t.name}}</a>
         {% endfor %}
     </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div id="extend" onclick="openNav();"><img src="/static/images/icons/list.png"></div>
         <a class="navbar-brand" href="/">어느 카페 갈까?</a>
         <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-        <div class="nav-link" onclick="openNav()">Tag 리스트 보기</div>
-        </li>
             {% if user is not None %}
                 <li class="nav-item">
                 <a class="nav-link" href="/">{{ user.name }}</a>
