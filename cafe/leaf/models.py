@@ -17,15 +17,33 @@ class Cafe(models.Model):
     available_seat = models.IntegerField()
     tags = models.ManyToManyField(Tag)
 
+    @staticmethod
+    def getCafesByTag(tag=None):
+        try:
+            cafes = Tag.objects.filter(name=tag).first().cafe_set.all()
+        except:
+            cafes = Cafe.objects.all()
+
+        return cafes
+
 
 class User(models.Model):
     id = models.AutoField(primary_key=True)
-    user_id = models.CharField(max_length=20)
+    user_id = models.CharField(max_length=20, unique=True)  # email
     password = models.CharField(max_length=20)
     name = models.CharField(max_length=10)
-    is_staff = models.BooleanField(default=False)
     tag_search = models.CharField(max_length=1000, null=True)
-    cafe_id = models.ForeignKey(Cafe, on_delete=models.CASCADE, null=True)
+
+    @staticmethod
+    def getUser(user_id):
+        try:
+            return User.objects.filter(user_id=user_id).first()
+        except:
+            return None
+
+    @staticmethod
+    def getUserByLogin(user_id, password):
+        return User.objects.filter(user_id=user_id, password=password).first()
 
 
 class Comment(models.Model):
