@@ -23,9 +23,21 @@ def cafe_detail(request, cafe_id):
     tags = [t.name for t in Cafe.objects.filter(id=cafe_id).first().tags.all()]
     return HttpResponse(json.dumps(tags), content_type='application/json')
 
+
 def cafe_comment(request, cafe_id):
     comments = [c for c in Comment.objects.filter(cafe_id=cafe_id).values()]
     return HttpResponse(json.dumps(comments), content_type='application/json')
 
-def login(request):
-    return render(request,'login.html',{})
+
+def signin(request):
+    if request.method == 'GET':
+        return render(request, 'signin.html', {'message': 'GET'})
+    else:
+        return render(request, 'signin.html', {'message': 'POST'})
+
+
+def signup(request):
+    if request.method == 'GET':
+        return render(request, 'signup.html', {'message': 'GET'})
+    else:
+        return render(request, 'signup.html', {'message': 'POST'})

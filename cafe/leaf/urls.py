@@ -5,5 +5,6 @@ urlpatterns = [
     path('', views.main),
     path('cafe/<cafe_id>', views.cafe_detail),
     path('cafe/comment/<cafe_id>', views.cafe_comment),
-    path('login',views.login)
+    path('signin', views.signin),
+    path('signup', views.signup)
 ]
