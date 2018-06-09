@@ -36,14 +36,16 @@ function addComment(cid) {
         type: "post",
         data: {comment: $('#comment').first().val(), rating: $('#rating').val() }
     }).done(function (comments) {
-        console.log(comments);
-        $('#comment-wrapper')[0].innerHTML = draw_comments_box(cid, comments)
+        $('#comment-wrapper')[0].outerHTML = draw_comments_box(cid, comments)
+    }).fail(function (msg){
+        alert('로그인을 해주세요 ㅜㅜ');
+        $('#comment').first().val("");
     });
 }
 
 function draw_comments_box(e, comment) {
     let content = '';
-    content += '<div id="comment-wrapper" class="d-flex flex-column" style="text-size: 10px; padding: 10px;">' +
+    content = '<div id="comment-wrapper" class="d-flex flex-column" style="text-size: 10px; padding: 10px;">' +
     '<div class="row">' +
     '<input type="text" class="form-control" id="comment" placeholder="댓글을 입력하세요!">' +
     '<select class="form-control col-2" id="rating" style="width: 30px;">' +
@@ -55,7 +57,6 @@ function draw_comments_box(e, comment) {
         '    </select>' +
     '<button class="btn-outline-info" onclick="addComment(' + e.pk + ')">작성</button>' +
     '</div>' +
-    '</div>' +
     '<div id="comment-box" style="height: 340px;">';
     comment.map(e => {
         content += '<div class="border" style="margin-top: 4px; text-align: left; padding: 4px;">' +
@@ -65,7 +66,7 @@ function draw_comments_box(e, comment) {
             + '</div>'
             + e.content + '</div>';
     });
-    content += '</div></div>'
+    content += '</div></div></div>';
     return content;
 }
 
@@ -86,7 +87,7 @@ function createInfoWindow(e, marker) {
             url: "/cafe/" + e.pk,
         }).done(function (data) {
             let content = '<div class="container">';
-            content += '<div style="width:400px;height:500px;text-align:center;padding:20px;"><p>' + e.fields.name + ' <span class="badge badge-danger">' + e.fields.available_seat + ' 자리남음</span></p>';
+            content += '<div style="width:400px;float:left; height:500px;text-align:center;padding:20px;"><p>' + e.fields.name + ' <span class="badge badge-danger">' + e.fields.available_seat + ' 자리남음</span></p>';
             data.map(e => {
                 content += '<a class="badge badge-info" href="/?tag='+ e+ '">' + e + '</a> ';
             });
@@ -96,7 +97,7 @@ function createInfoWindow(e, marker) {
             $.ajax({
                 url: "/cafe/" + e.pk + "/comments",
             }).done(function (comments) {
-                content += draw_comments_box(e, comments);
+                content = draw_comments_box(e, comments);
                 clickedIw = new daum.maps.InfoWindow({content: content});
                 clickedIw.open(map, marker);
                 iw.close();
