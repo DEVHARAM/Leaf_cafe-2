@@ -97,7 +97,7 @@ function createInfoWindow(e, marker) {
             $.ajax({
                 url: "/cafe/" + e.pk + "/comments",
             }).done(function (comments) {
-                content = draw_comments_box(e, comments);
+                content += draw_comments_box(e, comments);
                 clickedIw = new daum.maps.InfoWindow({content: content});
                 clickedIw.open(map, marker);
                 iw.close();
