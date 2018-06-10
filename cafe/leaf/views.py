@@ -1,7 +1,7 @@
 import json
 
 from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseBadRequest
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
@@ -18,7 +18,10 @@ def main(request):
 
     tag = request.GET.get('tag')
     if tag and user:
-        recent = user.tag_search.split('|')
+        try:
+            recent = user.tag_search.split('|')
+        except:
+            pass
         recent.append(tag)
         if len(recent) > 5:
             recent = recent[-5:]
@@ -39,6 +42,9 @@ def cafe_detail(request, cafe_id):
 @csrf_exempt
 def cafe_comment(request, cafe_id):
     if request.method == 'POST':
+        if 'current_user' not in request.session:
+            return HttpResponseBadRequest()
+
         c = Comment.objects.create(user=User.getUser(request.session['current_user']),
                                    cafe=Cafe.getCafe(cafe_id),
                                    content=request.POST['comment'],

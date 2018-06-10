@@ -23,7 +23,7 @@
         <div id="extend" onclick="openNav();"><img src="/static/images/icons/list.png"></div>
         <a class="navbar-brand" href="/" style="font-size: 20px; font-weight: lighter; flex:1;">어느 카페 갈까?</a>
         <ul class="navbar-nav mr-auto" style="right: 0; position: absolute; padding: 10px;">
-            {% if user.id is not None %}
+            {% if user.name is not None %}
                 <li class="nav-item">
                     <a class="nav-link" href="/">{{ user.name }}</a>
                 </li>
